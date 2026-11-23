@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RERUN Brasil — Passe adiante. O esporte continua.</title>
+<meta name="description" content="RERUN Brasil — redistribuição de equipamentos esportivos para pessoas em vulnerabilidade, migrantes e refugiados. Passe adiante. O esporte continua.">
+<meta name="theme-color" content="#E8622B">
+<meta property="og:title" content="RERUN Brasil — Passe adiante. O esporte continua.">
+<meta property="og:description" content="Redistribuição de equipamentos esportivos para quem mais precisa. Doe e transforme vidas pelo esporte.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏃</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --black:#1A1A18;
+  --orange:#E8622B;
+  --orange-soft:rgba(232,98,43,.08);
+  --cream:#FAF5EF;
+  --forest:#2D5A3D;
+  --forest-soft:rgba(45,90,61,.08);
+  --grey:#9B9590;
+  --border:rgba(26,26,24,.08);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--cream);color:var(--black);
+  font-family:'Libre Franklin',system-ui,sans-serif;
+  font-weight:300;line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem clamp(1.5rem,5vw,4rem);
+  background:rgba(250,245,239,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-size:1.1rem;font-weight:800;
+  letter-spacing:.06em;color:var(--orange);
+}
+.nav-cta{
+  font-size:.78rem;font-weight:600;color:var(--cream);
+  background:var(--orange);
+  padding:.5rem 1.3rem;text-decoration:none;
+  transition:all .3s;
+}
+.nav-cta:hover{background:#D4551F}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;min-height:100dvh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(7rem,15vh,10rem) clamp(1.5rem,5vw,4rem) 4rem;
+  max-width:900px;margin:0 auto;
+}
+.hero-tag{
+  font-size:.72rem;font-weight:600;
+  letter-spacing:.15em;color:var(--forest);
+  margin-bottom:1.2rem;
+}
+.hero h1{
+  font-size:clamp(2.4rem,5.5vw,4rem);
+  font-weight:800;line-height:1.1;
+  margin-bottom:1rem;
+}
+.hero h1 span{color:var(--orange)}
+.hero-tagline{
+  font-family:'Lora',serif;
+  font-size:clamp(1.1rem,2vw,1.4rem);
+  font-style:italic;
+  color:var(--grey);
+  margin-bottom:2.5rem;
+}
+.hero-desc{
+  font-size:.95rem;color:var(--grey);
+  max-width:500px;margin-bottom:2.5rem;
+  line-height:1.9;
+}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  display:inline-block;padding:.9rem 2rem;
+  background:var(--orange);color:var(--cream);
+  font-weight:600;font-size:.85rem;
+  letter-spacing:.03em;text-decoration:none;
+  transition:all .3s;
+}
+.btn-primary:hover{background:#D4551F}
+.btn-outline{
+  display:inline-block;padding:.9rem 2rem;
+  border:2px solid var(--black);
+  color:var(--black);font-weight:500;
+  font-size:.85rem;text-decoration:none;
+  transition:all .3s;
+}
+.btn-outline:hover{background:var(--black);color:var(--cream)}
+
+/* ── SECTIONS ── */
+.section{
+  padding:clamp(4rem,10vw,6rem) clamp(1.5rem,5vw,4rem);
+  max-width:900px;margin:0 auto;
+}
+.section-head{
+  font-size:clamp(1.5rem,3vw,2.2rem);
+  font-weight:700;line-height:1.25;
+  margin-bottom:.5rem;
+}
+.section-sub{
+  font-size:.9rem;color:var(--grey);
+  max-width:480px;margin-bottom:2.5rem;
+}
+
+/* ── MISSION ── */
+.mission{border-top:2px solid var(--border)}
+.mission-text{
+  font-family:'Lora',serif;
+  font-size:clamp(1.1rem,2vw,1.35rem);
+  line-height:1.8;color:var(--black);
+  max-width:600px;
+}
+
+/* ── HOW ── */
+.how{border-top:2px solid var(--border)}
+.how-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:2rem;
+}
+.how-card{
+  padding:2rem;
+  border:2px solid var(--border);
+  transition:border-color .3s;
+}
+.how-card:hover{border-color:rgba(232,98,43,.2)}
+.how-card .num{
+  font-size:2rem;font-weight:800;
+  color:rgba(232,98,43,.15);
+  line-height:1;margin-bottom:.8rem;
+}
+.how-card h3{font-size:.95rem;font-weight:600;margin-bottom:.4rem}
+.how-card p{font-size:.82rem;color:var(--grey);line-height:1.8}
+
+/* ── WHO ── */
+.who{border-top:2px solid var(--border)}
+.who-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:2px solid var(--border);
+}
+.who-col{
+  background:var(--cream);
+  padding:2rem;
+}
+.who-col h3{
+  font-size:.85rem;font-weight:600;
+  letter-spacing:.08em;margin-bottom:1rem;
+}
+.who-col ul{list-style:none}
+.who-col li{
+  font-size:.85rem;color:var(--grey);
+  padding:.3rem 0;
+  border-bottom:1px solid rgba(26,26,24,.04);
+  line-height:1.6;
+}
+.who-col li::before{
+  content:"→ ";color:var(--orange);font-weight:500;
+}
+
+/* ── IMPACT ── */
+.impact{
+  border-top:2px solid var(--border);
+  text-align:center;
+}
+.impact-row{
+  display:flex;justify-content:center;gap:clamp(2rem,6vw,5rem);
+  flex-wrap:wrap;
+  margin-top:2.5rem;
+}
+.impact-stat{text-align:center}
+.impact-num{
+  font-size:clamp(2rem,4vw,3rem);
+  font-weight:800;color:var(--orange);
+  line-height:1.1;
+}
+.impact-label{
+  font-size:.72rem;color:var(--grey);
+  margin-top:.2rem;letter-spacing:.04em;
+}
+
+/* ── CTA ── */
+.final-cta{
+  text-align:center;
+  border-top:2px solid var(--border);
+  padding-top:clamp(5rem,12vw,8rem);
+  padding-bottom:clamp(5rem,12vw,8rem);
+}
+.final-cta .section-head{max-width:500px;margin:0 auto .5rem}
+
+/* ── FOOTER ── */
+footer{
+  text-align:center;
+  padding:2rem 1.5rem 3rem;
+  font-size:.68rem;color:var(--grey);
+  border-top:2px solid var(--border);
+}
+footer a{color:var(--orange);text-decoration:none}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:600px){
+  .hero h1{font-size:2.2rem}
+  .nav-cta{display:none}
+  .who-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">RERUN</div>
+  <a href="#doar" class="nav-cta">Quero doar</a>
+</nav>
+
+<section class="hero">
+  <p class="hero-tag">PROJETO SOCIAL · BRASIL</p>
+  <h1>Passe <span>adiante.</span><br>O esporte continua.</h1>
+  <p class="hero-tagline">Redistribuição de equipamentos esportivos para quem mais precisa.</p>
+  <p class="hero-desc">O RERUN conecta quem tem equipamentos esportivos parados a pessoas em situação de vulnerabilidade — incluindo migrantes e refugiados — para quem o esporte é ferramenta de saúde, dignidade e integração.</p>
+  <div class="hero-actions">
+    <a href="#doar" class="btn-primary">Quero doar equipamentos</a>
+    <a href="#como" class="btn-outline">Como funciona</a>
+  </div>
+</section>
+
+<section class="section mission">
+  <div class="reveal">
+    <h2 class="section-head">Missão</h2>
+    <p class="mission-text">Acreditamos que o esporte é um direito, não um privilégio. No Brasil, milhões de pessoas não praticam atividade física simplesmente porque não têm o equipamento. Um par de tênis. Uma bicicleta. Uma bola. O RERUN existe para mudar isso — um equipamento de cada vez.</p>
+  </div>
+</section>
+
+<section class="section how" id="como">
+  <div class="reveal">
+    <h2 class="section-head">Como funciona</h2>
+    <p class="section-sub">Simples, direto e transparente.</p>
+  </div>
+  <div class="how-grid">
+    <div class="how-card reveal">
+      <div class="num">01</div>
+      <h3>Doe seu equipamento</h3>
+      <p>Tênis, bicicleta, raquete, bola, roupa esportiva — tudo que está parado na sua casa e ainda tem vida útil.</p>
+    </div>
+    <div class="how-card reveal">
+      <div class="num">02</div>
+      <h3>Triagem e higienização</h3>
+      <p>Recebemos, avaliamos a condição e preparamos cada item para ser entregue com dignidade.</p>
+    </div>
+    <div class="how-card reveal">
+      <div class="num">03</div>
+      <h3>Entrega com propósito</h3>
+      <p>Distribuímos para comunidades, projetos sociais, abrigos e organizações que trabalham com populações vulneráveis.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section who">
+  <div class="reveal">
+    <h2 class="section-head">Para quem</h2>
+    <p class="section-sub">O esporte como ponte entre realidades.</p>
+  </div>
+  <div class="who-grid reveal">
+    <div class="who-col">
+      <h3>QUEM RECEBE</h3>
+      <ul>
+        <li>Jovens em situação de vulnerabilidade social</li>
+        <li>Migrantes e refugiados</li>
+        <li>Comunidades periféricas</li>
+        <li>Projetos sociais esportivos</li>
+        <li>Pessoas em situação de rua</li>
+      </ul>
+    </div>
+    <div class="who-col">
+      <h3>QUEM DOA</h3>
+      <ul>
+        <li>Atletas amadores e profissionais</li>
+        <li>Academias e estúdios</li>
+        <li>Lojas e marcas esportivas</li>
+        <li>Eventos e corridas de rua</li>
+        <li>Qualquer pessoa com equipamento parado</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section impact">
+  <div class="reveal">
+    <h2 class="section-head">O impacto que queremos</h2>
+    <p class="section-sub center">Metas do primeiro ano de operação.</p>
+  </div>
+  <div class="impact-row reveal">
+    <div class="impact-stat">
+      <div class="impact-num">1.000</div>
+      <div class="impact-label">equipamentos redistribuídos</div>
+    </div>
+    <div class="impact-stat">
+      <div class="impact-num">50</div>
+      <div class="impact-label">pontos de coleta</div>
+    </div>
+    <div class="impact-stat">
+      <div class="impact-num">10</div>
+      <div class="impact-label">cidades alcançadas</div>
+    </div>
+  </div>
+</section>
+
+<section class="section final-cta" id="doar">
+  <div class="reveal">
+    <h2 class="section-head">Tem um equipamento parado? Ele pode mudar uma vida.</h2>
+    <p class="section-sub center">Entre em contato para saber como doar ou montar um ponto de coleta na sua cidade.</p>
+    <a href="mailto:contato@rerunbrasil.com.br" class="btn-primary">Quero doar</a>
+  </div>
+</section>
+
+<footer>
+  <p>RERUN Brasil — <a href="https://rerunbrasil.com.br">rerunbrasil.com.br</a></p>
+  <p style="margin-top:.5rem">Passe adiante. O esporte continua.</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
