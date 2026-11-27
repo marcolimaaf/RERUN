@@ -5,27 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RERUN Brasil — Passe adiante. O esporte continua.</title>
 <meta name="description" content="RERUN Brasil — redistribuição de equipamentos esportivos para pessoas em vulnerabilidade, migrantes e refugiados. Passe adiante. O esporte continua.">
-<meta name="theme-color" content="#E8622B">
+<meta name="theme-color" content="#121210">
+<link rel="canonical" href="https://rerunbrasil.com.br/">
 <meta property="og:title" content="RERUN Brasil — Passe adiante. O esporte continua.">
 <meta property="og:description" content="Redistribuição de equipamentos esportivos para quem mais precisa. Doe e transforme vidas pelo esporte.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://rerunbrasil.com.br/">
+<meta property="og:image" content="https://rerunbrasil.com.br/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏃</text></svg>">
+<meta name="twitter:image" content="https://rerunbrasil.com.br/assets/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23121210'/><path d='M14 44 L30 20 L38 32 L50 20' stroke='%23E8622B' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"NGO","name":"RERUN Brasil","url":"https://rerunbrasil.com.br","slogan":"Passe adiante. O esporte continua.","email":"lifecompany@lifecompany.app.br","areaServed":"BR","description":"Redistribuição de equipamentos esportivos para pessoas em situação de vulnerabilidade, incluindo migrantes e refugiados."}
+</script>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
+  --ink:#121210;
   --black:#1A1A18;
   --orange:#E8622B;
-  --orange-soft:rgba(232,98,43,.08);
+  --orange-hot:#FF7A3D;
   --cream:#FAF5EF;
+  --sand:#F1E8DC;
   --forest:#2D5A3D;
-  --forest-soft:rgba(45,90,61,.08);
-  --grey:#9B9590;
-  --border:rgba(26,26,24,.08);
+  --grey:#8A847E;
+  --grey-light:#B9B2AA;
+  --line:rgba(26,26,24,.1);
+  --line-dark:rgba(250,245,239,.12);
+  --gutter:clamp(1rem,5vw,4rem);
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 html{scroll-behavior:smooth;font-size:16px}
 body{
@@ -35,321 +49,763 @@ body{
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
+::selection{background:var(--orange);color:var(--cream)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* film grain over everything */
+.grain{
+  position:fixed;inset:-50%;z-index:200;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation:grain 1s steps(6) infinite;
+}
+@keyframes grain{
+  0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}
+  60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}
+}
+
+/* ── OPENING TITLE CARD ── */
+.intro{
+  position:fixed;inset:0;z-index:300;background:var(--ink);
+  display:grid;place-items:center;color:var(--cream);
+  transition:opacity .8s var(--ease) .1s,visibility 0s linear .9s;
+}
+.intro.done{opacity:0;visibility:hidden}
+.intro-inner{text-align:center}
+.intro-kicker{font-size:.68rem;letter-spacing:.4em;color:var(--grey-light);opacity:0;animation:fadeUp .8s var(--ease) .2s forwards}
+.intro-word{
+  font-weight:900;font-size:clamp(3.5rem,14vw,9rem);letter-spacing:-.02em;line-height:1;
+  display:flex;justify-content:center;overflow:hidden;
+}
+.intro-word span{display:inline-block;transform:translateY(105%);animation:rise .9s var(--ease) forwards}
+.intro-word span:nth-child(1){animation-delay:.35s}
+.intro-word span:nth-child(2){animation-delay:.42s}
+.intro-word span:nth-child(3){animation-delay:.49s;color:var(--orange)}
+.intro-word span:nth-child(4){animation-delay:.56s;color:var(--orange)}
+.intro-word span:nth-child(5){animation-delay:.63s;color:var(--orange)}
+.intro-bar{width:min(240px,50vw);height:2px;background:var(--line-dark);margin:1.4rem auto 0;overflow:hidden}
+.intro-bar i{display:block;height:100%;background:var(--orange);transform:scaleX(0);transform-origin:left;animation:fill 1.3s var(--ease) .4s forwards}
+@keyframes rise{to{transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes fill{to{transform:scaleX(1)}}
 
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1rem clamp(1.5rem,5vw,4rem);
-  background:rgba(250,245,239,.92);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
+  padding:1rem var(--gutter);
+  color:var(--cream);
+  transition:background .4s,color .4s,padding .4s,border-color .4s;
+  border-bottom:1px solid transparent;
 }
-.nav-logo{
-  font-size:1.1rem;font-weight:800;
-  letter-spacing:.06em;color:var(--orange);
+nav.solid{
+  background:rgba(250,245,239,.88);color:var(--black);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom-color:var(--line);padding-top:.7rem;padding-bottom:.7rem;
 }
-.nav-cta{
-  font-size:.78rem;font-weight:600;color:var(--cream);
-  background:var(--orange);
-  padding:.5rem 1.3rem;text-decoration:none;
-  transition:all .3s;
+.nav-logo{font-size:1.05rem;font-weight:900;letter-spacing:.08em;text-decoration:none;display:flex;align-items:center}
+.nav-logo b{color:var(--orange);font-weight:900}
+.nav-links{display:flex;gap:2rem;align-items:center;font-size:.78rem;font-weight:500;letter-spacing:.04em}
+.nav-links a{text-decoration:none;opacity:.8;transition:opacity .2s}
+.nav-links a:hover{opacity:1}
+.nav-links .nav-cta{
+  opacity:1;color:var(--cream);background:var(--orange);
+  padding:.55rem 1.3rem;font-weight:600;transition:background .3s;
 }
-.nav-cta:hover{background:#D4551F}
+.nav-links .nav-cta:hover{background:#D4551F}
 
 /* ── HERO ── */
 .hero{
-  min-height:100vh;min-height:100dvh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(7rem,15vh,10rem) clamp(1.5rem,5vw,4rem) 4rem;
-  max-width:900px;margin:0 auto;
+  position:relative;min-height:100vh;min-height:100svh;
+  background:var(--ink);color:var(--cream);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:8rem var(--gutter) clamp(3rem,8vh,5rem);
+  overflow:hidden;isolation:isolate;
 }
-.hero-tag{
-  font-size:.72rem;font-weight:600;
-  letter-spacing:.15em;color:var(--forest);
-  margin-bottom:1.2rem;
+.hero canvas,.hero video{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.hero video{object-fit:cover;opacity:0;transition:opacity 1.2s}
+.hero video.ready{opacity:.55}
+.hero::after{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 110%,rgba(232,98,43,.18),transparent 60%),
+    linear-gradient(180deg,rgba(18,18,16,.55) 0%,rgba(18,18,16,0) 30%,rgba(18,18,16,0) 55%,rgba(18,18,16,.9) 100%);
 }
+.hero-meta{
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.66rem;letter-spacing:.28em;color:var(--grey-light);
+  margin-bottom:clamp(1.5rem,4vh,3rem);
+}
+.hero-meta .rec::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--orange);margin-right:.6rem;vertical-align:middle;animation:blink 1.6s infinite}
+@keyframes blink{50%{opacity:.2}}
 .hero h1{
-  font-size:clamp(2.4rem,5.5vw,4rem);
-  font-weight:800;line-height:1.1;
-  margin-bottom:1rem;
+  font-weight:900;letter-spacing:-.035em;
+  font-size:clamp(2.9rem,min(9vw,12.5vh),8.5rem);line-height:.9;
 }
-.hero h1 span{color:var(--orange)}
-.hero-tagline{
-  font-family:'Lora',serif;
-  font-size:clamp(1.1rem,2vw,1.4rem);
-  font-style:italic;
-  color:var(--grey);
-  margin-bottom:2.5rem;
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .line>span{display:inline-block;transform:translateY(110%)}
+.hero.play h1 .line>span{animation:rise 1.2s var(--ease) forwards}
+.hero.play h1 .line:nth-child(2)>span{animation-delay:.12s}
+.hero.play h1 .line:nth-child(3)>span{animation-delay:.24s}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero-bottom{
+  display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:2rem;align-items:end;
+  margin-top:clamp(1.8rem,4vh,3rem);
+  opacity:0;transform:translateY(12px);
 }
-.hero-desc{
-  font-size:.95rem;color:var(--grey);
-  max-width:500px;margin-bottom:2.5rem;
-  line-height:1.9;
+.hero.play .hero-bottom{animation:fadeUp 1s var(--ease) .6s forwards}
+.hero-desc{font-family:'Lora',serif;font-size:clamp(1rem,1.5vw,1.2rem);line-height:1.65;color:rgba(250,245,239,.78);max-width:36rem}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:.7rem;
+  padding:1rem 1.8rem;font-weight:600;font-size:.85rem;letter-spacing:.02em;
+  text-decoration:none;border:0;cursor:pointer;font-family:inherit;
+  transition:background .3s,color .3s,transform .3s var(--ease);
 }
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{
-  display:inline-block;padding:.9rem 2rem;
-  background:var(--orange);color:var(--cream);
-  font-weight:600;font-size:.85rem;
-  letter-spacing:.03em;text-decoration:none;
-  transition:all .3s;
-}
+.btn:hover{transform:translateY(-2px)}
+.btn .arrow{transition:transform .3s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn-primary{background:var(--orange);color:var(--cream)}
 .btn-primary:hover{background:#D4551F}
-.btn-outline{
-  display:inline-block;padding:.9rem 2rem;
-  border:2px solid var(--black);
-  color:var(--black);font-weight:500;
-  font-size:.85rem;text-decoration:none;
-  transition:all .3s;
+.btn-ghost{color:var(--cream);box-shadow:inset 0 0 0 1.5px rgba(250,245,239,.35)}
+.btn-ghost:hover{box-shadow:inset 0 0 0 1.5px var(--cream)}
+.btn-dark{background:var(--black);color:var(--cream)}
+.btn-dark:hover{background:#000}
+.scroll-cue{
+  position:absolute;right:var(--gutter);top:50%;
+  writing-mode:vertical-rl;font-size:.62rem;letter-spacing:.35em;color:var(--grey-light);
+  display:flex;align-items:center;gap:1rem;
 }
-.btn-outline:hover{background:var(--black);color:var(--cream)}
+.scroll-cue::after{content:"";width:1px;height:60px;background:linear-gradient(var(--orange),transparent);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* ── SECTIONS ── */
-.section{
-  padding:clamp(4rem,10vw,6rem) clamp(1.5rem,5vw,4rem);
-  max-width:900px;margin:0 auto;
+/* ── MARQUEE ── */
+.marquee{
+  background:var(--orange);color:var(--ink);overflow:hidden;
+  padding:1.05rem 0;border-block:1px solid rgba(0,0,0,.1);
 }
-.section-head{
-  font-size:clamp(1.5rem,3vw,2.2rem);
-  font-weight:700;line-height:1.25;
-  margin-bottom:.5rem;
-}
-.section-sub{
-  font-size:.9rem;color:var(--grey);
-  max-width:480px;margin-bottom:2.5rem;
-}
+.marquee-track{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.marquee span{font-weight:900;font-size:clamp(1rem,2vw,1.35rem);letter-spacing:.06em;white-space:nowrap;padding-right:2.2rem}
+.marquee span i{font-style:normal;opacity:.45;padding-left:2.2rem}
+@keyframes marquee{to{transform:translateX(-50%)}}
 
-/* ── MISSION ── */
-.mission{border-top:2px solid var(--border)}
+/* ── SHARED ── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--gutter)}
+.section{padding:clamp(5rem,12vw,9rem) 0}
+.act{
+  display:flex;align-items:center;gap:1rem;
+  font-size:.66rem;font-weight:600;letter-spacing:.3em;color:var(--forest);
+  margin-bottom:2rem;
+}
+.act::after{content:"";flex:0 0 60px;height:1px;background:currentColor;opacity:.5}
+.dark .act{color:var(--orange)}
+.h2{font-weight:800;letter-spacing:-.025em;line-height:1.02;font-size:clamp(2.2rem,5.5vw,4.4rem);max-width:16ch}
+.h2 em{font-family:'Lora',serif;font-weight:400;font-style:italic;letter-spacing:-.01em}
+.lede{font-size:1rem;color:var(--grey);max-width:34rem;margin-top:1.2rem}
+.dark{background:var(--ink);color:var(--cream)}
+.dark .lede{color:var(--grey-light)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* ── MISSION (scroll-lit words) ── */
+.mission-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:clamp(2rem,6vw,6rem)}
 .mission-text{
-  font-family:'Lora',serif;
-  font-size:clamp(1.1rem,2vw,1.35rem);
-  line-height:1.8;color:var(--black);
-  max-width:600px;
+  font-family:'Lora',serif;font-size:clamp(1.5rem,3.3vw,2.6rem);line-height:1.38;letter-spacing:-.01em;
 }
+.mission-text .w{opacity:.14;transition:opacity .25s linear}
+.mission-text .w.on{opacity:1}
+.mission-text .hl{color:var(--orange)}
+.mission-side{font-size:.85rem;color:var(--grey);border-top:1px solid var(--line);padding-top:1.2rem;align-self:start}
+.mission-side strong{display:block;font-weight:800;color:var(--black);font-size:1.05rem;margin-bottom:.3rem}
 
-/* ── HOW ── */
-.how{border-top:2px solid var(--border)}
-.how-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:2rem;
+/* ── JOURNEY (sticky scroll story) ── */
+.journey{position:relative;height:340vh}
+.journey-stage{
+  position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:clamp(5rem,10vh,7rem) var(--gutter) clamp(2rem,5vh,3rem);
 }
-.how-card{
-  padding:2rem;
-  border:2px solid var(--border);
-  transition:border-color .3s;
-}
-.how-card:hover{border-color:rgba(232,98,43,.2)}
-.how-card .num{
-  font-size:2rem;font-weight:800;
-  color:rgba(232,98,43,.15);
-  line-height:1;margin-bottom:.8rem;
-}
-.how-card h3{font-size:.95rem;font-weight:600;margin-bottom:.4rem}
-.how-card p{font-size:.82rem;color:var(--grey);line-height:1.8}
+.journey-head{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap}
+.journey-head .h2{font-size:clamp(2rem,4.5vw,3.6rem)}
+.journey-count{font-weight:900;font-size:clamp(3rem,8vw,6rem);line-height:.8;color:rgba(250,245,239,.08);font-variant-numeric:tabular-nums}
+.journey-count b{color:var(--orange);font-weight:900}
+.journey-svg{width:100%;height:100%;min-height:0}
+.journey-svg .track{stroke:rgba(250,245,239,.1);stroke-width:2;fill:none;stroke-dasharray:4 10}
+.journey-svg .trail{stroke:var(--orange);stroke-width:3;fill:none;stroke-linecap:round;filter:drop-shadow(0 0 8px rgba(232,98,43,.6))}
+.journey-svg .node{fill:var(--ink);stroke:rgba(250,245,239,.25);stroke-width:2;transition:all .4s}
+.journey-svg .node.on{fill:var(--orange);stroke:var(--orange)}
+.journey-svg .node-label{fill:rgba(250,245,239,.35);font:600 13px 'Libre Franklin',sans-serif;letter-spacing:.2em;transition:fill .4s}
+.journey-svg .node-label.on{fill:var(--cream)}
+.journey-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1rem,3vw,3rem)}
+.step{border-top:1px solid var(--line-dark);padding-top:1.2rem;opacity:.3;transition:opacity .5s,border-color .5s}
+.step.on{opacity:1;border-color:var(--orange)}
+.step .n{font-size:.66rem;letter-spacing:.3em;color:var(--orange);font-weight:600}
+.step h3{font-size:clamp(1.05rem,1.6vw,1.35rem);font-weight:700;margin:.4rem 0 .35rem;letter-spacing:-.01em}
+.step p{font-size:.85rem;color:var(--grey-light);line-height:1.7}
 
 /* ── WHO ── */
-.who{border-top:2px solid var(--border)}
-.who-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--border);
-  border:2px solid var(--border);
+.who-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem);margin-top:clamp(3rem,6vw,5rem)}
+.who-card{position:relative;padding:clamp(1.8rem,4vw,3rem);background:var(--sand);overflow:hidden}
+.who-card.alt{background:var(--forest);color:var(--cream)}
+.who-card .tag{font-size:.66rem;letter-spacing:.3em;font-weight:600;color:var(--orange)}
+.who-card.alt .tag{color:#F6B48F}
+.who-card h3{font-size:clamp(1.6rem,3vw,2.3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:.6rem 0 1.6rem}
+.who-card ul{list-style:none}
+.who-card li{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:.85rem 0;border-top:1px solid var(--line);font-size:.95rem;font-weight:400;
+  transition:padding .4s var(--ease),color .3s;
 }
-.who-col{
-  background:var(--cream);
-  padding:2rem;
-}
-.who-col h3{
-  font-size:.85rem;font-weight:600;
-  letter-spacing:.08em;margin-bottom:1rem;
-}
-.who-col ul{list-style:none}
-.who-col li{
-  font-size:.85rem;color:var(--grey);
-  padding:.3rem 0;
-  border-bottom:1px solid rgba(26,26,24,.04);
-  line-height:1.6;
-}
-.who-col li::before{
-  content:"→ ";color:var(--orange);font-weight:500;
+.who-card.alt li{border-color:rgba(250,245,239,.15)}
+.who-card li::after{content:"→";color:var(--orange);opacity:0;transform:translateX(-8px);transition:all .4s var(--ease)}
+.who-card li:hover{padding-left:.6rem}
+.who-card li:hover::after{opacity:1;transform:none}
+.who-card .big{
+  position:absolute;right:-.06em;bottom:-.22em;font-weight:900;font-size:clamp(6rem,14vw,11rem);
+  line-height:1;letter-spacing:-.05em;opacity:.06;pointer-events:none;
 }
 
 /* ── IMPACT ── */
-.impact{
-  border-top:2px solid var(--border);
-  text-align:center;
-}
-.impact-row{
-  display:flex;justify-content:center;gap:clamp(2rem,6vw,5rem);
-  flex-wrap:wrap;
-  margin-top:2.5rem;
-}
-.impact-stat{text-align:center}
-.impact-num{
-  font-size:clamp(2rem,4vw,3rem);
-  font-weight:800;color:var(--orange);
-  line-height:1.1;
-}
-.impact-label{
-  font-size:.72rem;color:var(--grey);
-  margin-top:.2rem;letter-spacing:.04em;
-}
+.impact{position:relative;overflow:hidden}
+.impact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:clamp(3rem,6vw,5rem);border-top:1px solid var(--line-dark)}
+.stat{padding:clamp(1.8rem,4vw,3rem) clamp(1rem,2vw,2rem) 0 0;border-right:1px solid var(--line-dark)}
+.stat+.stat{padding-left:clamp(1rem,2vw,2rem)}
+.stat:last-child{border-right:0}
+.stat-num{font-weight:900;font-size:clamp(3rem,8.5vw,7.5rem);line-height:.9;letter-spacing:-.04em;color:var(--cream);font-variant-numeric:tabular-nums}
+.stat-num sup{font-size:.35em;color:var(--orange);vertical-align:top;margin-left:.08em}
+.stat-label{margin-top:.8rem;font-size:.85rem;color:var(--grey-light)}
+.stat-bar{height:2px;background:var(--line-dark);margin-top:1.4rem;overflow:hidden}
+.stat-bar i{display:block;height:100%;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform 2.2s var(--ease) .2s}
+.visible .stat-bar i{transform:scaleX(1)}
+.impact-note{margin-top:2rem;font-size:.75rem;color:var(--grey);letter-spacing:.04em}
 
-/* ── CTA ── */
-.final-cta{
-  text-align:center;
-  border-top:2px solid var(--border);
-  padding-top:clamp(5rem,12vw,8rem);
-  padding-bottom:clamp(5rem,12vw,8rem);
+/* ── DONATE BUILDER ── */
+.donate-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.panel{background:#fff;padding:clamp(1.5rem,3.5vw,2.6rem);box-shadow:0 30px 60px -30px rgba(26,26,24,.18),0 0 0 1px var(--line)}
+.panel h3{font-size:.7rem;letter-spacing:.28em;font-weight:600;color:var(--grey);margin-bottom:1rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip label{
+  display:inline-flex;align-items:center;gap:.45rem;cursor:pointer;user-select:none;
+  padding:.6rem 1rem;font-size:.85rem;font-weight:500;
+  box-shadow:inset 0 0 0 1.5px var(--line);transition:all .25s var(--ease);
 }
-.final-cta .section-head{max-width:500px;margin:0 auto .5rem}
+.chip label:hover{box-shadow:inset 0 0 0 1.5px var(--black)}
+.chip input:checked+label{background:var(--black);color:var(--cream);box-shadow:none}
+.chip input:checked+label::before{content:"✓";color:var(--orange);font-weight:700}
+.chip input:focus-visible+label{outline:2px solid var(--orange);outline-offset:2px}
+.field{display:block;margin-bottom:1.4rem}
+.field span{display:block;font-size:.7rem;letter-spacing:.28em;font-weight:600;color:var(--grey);margin-bottom:.6rem}
+.field input,.field select{
+  width:100%;font:inherit;font-weight:400;font-size:1rem;color:var(--black);
+  padding:.85rem 0;border:0;border-bottom:1.5px solid var(--line);background:transparent;border-radius:0;
+  transition:border-color .3s;
+}
+.field input:focus,.field select:focus{outline:0;border-color:var(--orange)}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:2rem}
+.mode .chip label{width:100%;justify-content:center}
+.panel .btn{width:100%;justify-content:center}
+.panel-note{font-size:.72rem;color:var(--grey);margin-top:1rem;text-align:center}
+.checklist{list-style:none;margin-top:2.2rem}
+.checklist li{display:grid;grid-template-columns:2.2rem 1fr;gap:.6rem;padding:1rem 0;border-top:1px solid var(--line);font-size:.92rem}
+.checklist li b{font-weight:900;color:var(--orange);font-size:.8rem;letter-spacing:.08em;padding-top:.15rem}
+
+/* ── FINALE ── */
+.finale{position:relative;overflow:hidden;text-align:center;padding:clamp(6rem,16vw,12rem) 0}
+.finale-word{
+  font-weight:900;letter-spacing:-.05em;line-height:.82;
+  font-size:clamp(4rem,19vw,17rem);white-space:nowrap;
+  background:linear-gradient(90deg,var(--cream) 0%,var(--cream) 40%,var(--orange) 50%,var(--cream) 60%,var(--cream) 100%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:sheen 6s ease-in-out infinite;
+}
+@keyframes sheen{0%{background-position:100% 0}60%,100%{background-position:-50% 0}}
+.finale p{font-family:'Lora',serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--grey-light);margin:2rem auto 2.5rem;max-width:30rem}
 
 /* ── FOOTER ── */
-footer{
-  text-align:center;
-  padding:2rem 1.5rem 3rem;
-  font-size:.68rem;color:var(--grey);
-  border-top:2px solid var(--border);
+footer{background:var(--ink);color:var(--grey-light);border-top:1px solid var(--line-dark);padding:3rem 0 2.5rem;font-size:.78rem}
+.foot{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:end}
+.foot .nav-logo{color:var(--cream);font-size:1.4rem}
+.foot a{text-decoration:none;color:var(--cream)}
+.foot a:hover{color:var(--orange)}
+.foot-credits{letter-spacing:.18em;font-size:.62rem;text-align:right;line-height:2}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .mission-grid,.donate-grid{grid-template-columns:1fr}
+  .hero-bottom{grid-template-columns:1fr}
+  .scroll-cue{display:none}
 }
-footer a{color:var(--orange);text-decoration:none}
-
-/* ── REVEAL ── */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-@media(max-width:600px){
-  .hero h1{font-size:2.2rem}
-  .nav-cta{display:none}
+@media(max-width:700px){
+  .nav-links a:not(.nav-cta){display:none}
+  .nav-links .nav-cta{padding:.5rem 1rem;font-size:.72rem}
   .who-grid{grid-template-columns:1fr}
+  .impact-grid{grid-template-columns:1fr}
+  .stat,.stat+.stat{border-right:0;border-bottom:1px solid var(--line-dark);padding:2rem 0}
+  .journey{height:300vh}
+  .journey-steps{grid-template-columns:1fr;gap:0}
+  .step{display:none;opacity:1}
+  .step.on{display:block}
+  .journey-count{display:none}
+  .hero-meta span:last-child{display:none}
+  .foot-credits{text-align:left}
 }
 @media(prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .grain{display:none}
+  .reveal{opacity:1;transform:none}
+  .hero h1 .line>span,.hero-bottom{transform:none;opacity:1}
+  .mission-text .w{opacity:1}
+  .marquee-track{animation:none}
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-logo">RERUN</div>
-  <a href="#doar" class="nav-cta">Quero doar</a>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-inner">
+    <p class="intro-kicker">UM PROJETO SOCIAL BRASILEIRO</p>
+    <div class="intro-word"><span>R</span><span>E</span><span>R</span><span>U</span><span>N</span></div>
+    <div class="intro-bar"><i></i></div>
+  </div>
+</div>
+
+<nav id="nav" aria-label="Principal">
+  <a href="#top" class="nav-logo" aria-label="RERUN, início">RE<b>RUN</b></a>
+  <div class="nav-links">
+    <a href="#missao">Missão</a>
+    <a href="#como">Como funciona</a>
+    <a href="#impacto">Metas</a>
+    <a href="#doar" class="nav-cta">Quero doar</a>
+  </div>
 </nav>
 
-<section class="hero">
-  <p class="hero-tag">PROJETO SOCIAL · BRASIL</p>
-  <h1>Passe <span>adiante.</span><br>O esporte continua.</h1>
-  <p class="hero-tagline">Redistribuição de equipamentos esportivos para quem mais precisa.</p>
-  <p class="hero-desc">O RERUN conecta quem tem equipamentos esportivos parados a pessoas em situação de vulnerabilidade — incluindo migrantes e refugiados — para quem o esporte é ferramenta de saúde, dignidade e integração.</p>
-  <div class="hero-actions">
-    <a href="#doar" class="btn-primary">Quero doar equipamentos</a>
-    <a href="#como" class="btn-outline">Como funciona</a>
+<main id="top">
+
+<section class="hero" id="hero" aria-labelledby="hero-title">
+  <!-- Vídeo de abertura opcional: coloque assets/hero.mp4 no repositório (ver HIGGSFIELD.md). Sem o arquivo, a animação em canvas assume. -->
+  <video id="heroVideo" muted playsinline loop preload="none" aria-hidden="true" data-src="assets/hero.mp4"></video>
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+
+  <div class="hero-meta">
+    <span class="rec">PROJETO SOCIAL · BRASIL</span>
+    <span>REDISTRIBUIÇÃO DE EQUIPAMENTOS ESPORTIVOS</span>
+  </div>
+
+  <h1 id="hero-title">
+    <span class="line"><span>Passe</span></span>
+    <span class="line"><span><em>adiante.</em></span></span>
+    <span class="line"><span>O esporte continua.</span></span>
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">O RERUN conecta quem tem equipamentos esportivos parados a pessoas em situação de vulnerabilidade — incluindo migrantes e refugiados — para quem o esporte é ferramenta de saúde, dignidade e integração.</p>
+    <div class="hero-actions">
+      <a href="#doar" class="btn btn-primary">Quero doar equipamentos <span class="arrow">→</span></a>
+      <a href="#como" class="btn btn-ghost">Como funciona</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">ROLE</div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>TÊNIS<i>●</i></span><span>BICICLETAS<i>●</i></span><span>BOLAS<i>●</i></span><span>RAQUETES<i>●</i></span><span>CHUTEIRAS<i>●</i></span><span>ROUPAS ESPORTIVAS<i>●</i></span><span>PASSE ADIANTE<i>●</i></span>
+    <span>TÊNIS<i>●</i></span><span>BICICLETAS<i>●</i></span><span>BOLAS<i>●</i></span><span>RAQUETES<i>●</i></span><span>CHUTEIRAS<i>●</i></span><span>ROUPAS ESPORTIVAS<i>●</i></span><span>PASSE ADIANTE<i>●</i></span>
+  </div>
+</div>
+
+<section class="section" id="missao" aria-labelledby="missao-title">
+  <div class="wrap mission-grid">
+    <div>
+      <p class="act reveal">ATO I · MISSÃO</p>
+      <h2 id="missao-title" class="sr-only">Missão</h2>
+      <div class="mission-side reveal reveal-d1">
+        <strong>O esporte é um direito.</strong>
+        Não um privilégio.
+      </div>
+    </div>
+    <p class="mission-text" id="missionText">Acreditamos que o esporte é um direito, não um privilégio. No Brasil, milhões de pessoas não praticam atividade física simplesmente porque não têm o equipamento. <span class="hl">Um par de tênis. Uma bicicleta. Uma bola.</span> O RERUN existe para mudar isso — um equipamento de cada vez.</p>
   </div>
 </section>
 
-<section class="section mission">
-  <div class="reveal">
-    <h2 class="section-head">Missão</h2>
-    <p class="mission-text">Acreditamos que o esporte é um direito, não um privilégio. No Brasil, milhões de pessoas não praticam atividade física simplesmente porque não têm o equipamento. Um par de tênis. Uma bicicleta. Uma bola. O RERUN existe para mudar isso — um equipamento de cada vez.</p>
-  </div>
-</section>
+<section class="journey dark" id="como" aria-labelledby="como-title">
+  <div class="journey-stage">
+    <div class="journey-head">
+      <div>
+        <p class="act">ATO II · COMO FUNCIONA</p>
+        <h2 id="como-title" class="h2">A segunda volta de um <em>equipamento.</em></h2>
+      </div>
+      <div class="journey-count" aria-hidden="true"><b id="jNum">01</b>/03</div>
+    </div>
 
-<section class="section how" id="como">
-  <div class="reveal">
-    <h2 class="section-head">Como funciona</h2>
-    <p class="section-sub">Simples, direto e transparente.</p>
-  </div>
-  <div class="how-grid">
-    <div class="how-card reveal">
-      <div class="num">01</div>
-      <h3>Doe seu equipamento</h3>
-      <p>Tênis, bicicleta, raquete, bola, roupa esportiva — tudo que está parado na sua casa e ainda tem vida útil.</p>
-    </div>
-    <div class="how-card reveal">
-      <div class="num">02</div>
-      <h3>Triagem e higienização</h3>
-      <p>Recebemos, avaliamos a condição e preparamos cada item para ser entregue com dignidade.</p>
-    </div>
-    <div class="how-card reveal">
-      <div class="num">03</div>
-      <h3>Entrega com propósito</h3>
-      <p>Distribuímos para comunidades, projetos sociais, abrigos e organizações que trabalham com populações vulneráveis.</p>
-    </div>
-  </div>
-</section>
+    <svg class="journey-svg" viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path id="jTrack" class="track" d="M40 250 C 220 250, 260 110, 420 110 S 640 290, 800 260 S 1020 90, 1160 120"/>
+      <path id="jTrail" class="trail" d="M40 250 C 220 250, 260 110, 420 110 S 640 290, 800 260 S 1020 90, 1160 120"/>
+      <g id="jNodes"></g>
+      <g id="jRunner">
+        <circle r="22" fill="rgba(232,98,43,.18)"/>
+        <circle r="9" fill="#E8622B"/>
+      </g>
+    </svg>
 
-<section class="section who">
-  <div class="reveal">
-    <h2 class="section-head">Para quem</h2>
-    <p class="section-sub">O esporte como ponte entre realidades.</p>
-  </div>
-  <div class="who-grid reveal">
-    <div class="who-col">
-      <h3>QUEM RECEBE</h3>
-      <ul>
-        <li>Jovens em situação de vulnerabilidade social</li>
-        <li>Migrantes e refugiados</li>
-        <li>Comunidades periféricas</li>
-        <li>Projetos sociais esportivos</li>
-        <li>Pessoas em situação de rua</li>
-      </ul>
-    </div>
-    <div class="who-col">
-      <h3>QUEM DOA</h3>
-      <ul>
-        <li>Atletas amadores e profissionais</li>
-        <li>Academias e estúdios</li>
-        <li>Lojas e marcas esportivas</li>
-        <li>Eventos e corridas de rua</li>
-        <li>Qualquer pessoa com equipamento parado</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="section impact">
-  <div class="reveal">
-    <h2 class="section-head">O impacto que queremos</h2>
-    <p class="section-sub center">Metas do primeiro ano de operação.</p>
-  </div>
-  <div class="impact-row reveal">
-    <div class="impact-stat">
-      <div class="impact-num">1.000</div>
-      <div class="impact-label">equipamentos redistribuídos</div>
-    </div>
-    <div class="impact-stat">
-      <div class="impact-num">50</div>
-      <div class="impact-label">pontos de coleta</div>
-    </div>
-    <div class="impact-stat">
-      <div class="impact-num">10</div>
-      <div class="impact-label">cidades alcançadas</div>
+    <div class="journey-steps">
+      <div class="step on" data-step="0">
+        <div class="n">01 · DOAÇÃO</div>
+        <h3>Doe seu equipamento</h3>
+        <p>Tênis, bicicleta, raquete, bola, roupa esportiva — tudo que está parado na sua casa e ainda tem vida útil.</p>
+      </div>
+      <div class="step" data-step="1">
+        <div class="n">02 · CUIDADO</div>
+        <h3>Triagem e higienização</h3>
+        <p>Recebemos, avaliamos a condição e preparamos cada item para ser entregue com dignidade.</p>
+      </div>
+      <div class="step" data-step="2">
+        <div class="n">03 · DESTINO</div>
+        <h3>Entrega com propósito</h3>
+        <p>Distribuímos para comunidades, projetos sociais, abrigos e organizações que trabalham com populações vulneráveis.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section final-cta" id="doar">
-  <div class="reveal">
-    <h2 class="section-head">Tem um equipamento parado? Ele pode mudar uma vida.</h2>
-    <p class="section-sub center">Entre em contato para saber como doar ou montar um ponto de coleta na sua cidade.</p>
-    <a href="mailto:lifecompany@lifecompany.app.br" class="btn-primary">Quero doar</a>
+<section class="section" id="quem" aria-labelledby="quem-title">
+  <div class="wrap">
+    <p class="act reveal">ATO III · PARA QUEM</p>
+    <h2 id="quem-title" class="h2 reveal reveal-d1">O esporte como <em>ponte</em> entre realidades.</h2>
+    <div class="who-grid">
+      <article class="who-card reveal">
+        <span class="tag">QUEM RECEBE</span>
+        <h3>Gente que só precisa de um começo.</h3>
+        <ul>
+          <li>Jovens em situação de vulnerabilidade social</li>
+          <li>Migrantes e refugiados</li>
+          <li>Comunidades periféricas</li>
+          <li>Projetos sociais esportivos</li>
+          <li>Pessoas em situação de rua</li>
+        </ul>
+        <span class="big" aria-hidden="true">RE</span>
+      </article>
+      <article class="who-card alt reveal reveal-d2">
+        <span class="tag">QUEM DOA</span>
+        <h3>Gente que já correu a sua volta.</h3>
+        <ul>
+          <li>Atletas amadores e profissionais</li>
+          <li>Academias e estúdios</li>
+          <li>Lojas e marcas esportivas</li>
+          <li>Eventos e corridas de rua</li>
+          <li>Qualquer pessoa com equipamento parado</li>
+        </ul>
+        <span class="big" aria-hidden="true">RUN</span>
+      </article>
+    </div>
   </div>
 </section>
+
+<section class="section impact dark" id="impacto" aria-labelledby="impacto-title">
+  <div class="wrap">
+    <p class="act reveal">ATO IV · O IMPACTO QUE QUEREMOS</p>
+    <h2 id="impacto-title" class="h2 reveal reveal-d1">Metas do primeiro <em>ano</em> de operação.</h2>
+    <div class="impact-grid reveal reveal-d2">
+      <div class="stat">
+        <div class="stat-num"><span data-count="1000">0</span></div>
+        <div class="stat-label">equipamentos redistribuídos</div>
+        <div class="stat-bar"><i></i></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span data-count="50">0</span></div>
+        <div class="stat-label">pontos de coleta</div>
+        <div class="stat-bar"><i></i></div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><span data-count="10">0</span></div>
+        <div class="stat-label">cidades alcançadas</div>
+        <div class="stat-bar"><i></i></div>
+      </div>
+    </div>
+    <p class="impact-note reveal">Números são metas, não resultados. Vamos publicar o placar real aqui, à medida que ele acontecer.</p>
+  </div>
+</section>
+
+<section class="section" id="doar" aria-labelledby="doar-title">
+  <div class="wrap donate-grid">
+    <div>
+      <p class="act reveal">ATO V · SUA VEZ</p>
+      <h2 id="doar-title" class="h2 reveal reveal-d1">Tem um equipamento parado? Ele pode <em>mudar uma vida.</em></h2>
+      <p class="lede reveal reveal-d2">Entre em contato para saber como doar ou montar um ponto de coleta na sua cidade. Monte sua mensagem ao lado — leva menos de um minuto.</p>
+      <ol class="checklist reveal reveal-d3">
+        <li><b>01</b><span>Separe o que está parado e ainda tem vida útil.</span></li>
+        <li><b>02</b><span>Conte pra gente o que é e de onde você fala.</span></li>
+        <li><b>03</b><span>A gente responde com o próximo passo.</span></li>
+      </ol>
+    </div>
+
+    <form class="panel reveal reveal-d2" id="donateForm" novalidate>
+      <fieldset style="border:0">
+        <legend><h3>O QUE VOCÊ QUER FAZER?</h3></legend>
+        <div class="mode">
+          <div class="chip"><input type="radio" name="mode" id="m1" value="doar" checked><label for="m1">Doar equipamentos</label></div>
+          <div class="chip"><input type="radio" name="mode" id="m2" value="ponto"><label for="m2">Montar ponto de coleta</label></div>
+        </div>
+      </fieldset>
+
+      <fieldset style="border:0">
+        <legend><h3>O QUE VOCÊ TEM?</h3></legend>
+        <div class="chips">
+          <div class="chip"><input type="checkbox" id="i1" value="Tênis"><label for="i1">Tênis</label></div>
+          <div class="chip"><input type="checkbox" id="i2" value="Bicicleta"><label for="i2">Bicicleta</label></div>
+          <div class="chip"><input type="checkbox" id="i3" value="Bola"><label for="i3">Bola</label></div>
+          <div class="chip"><input type="checkbox" id="i4" value="Raquete"><label for="i4">Raquete</label></div>
+          <div class="chip"><input type="checkbox" id="i5" value="Chuteira"><label for="i5">Chuteira</label></div>
+          <div class="chip"><input type="checkbox" id="i6" value="Roupa esportiva"><label for="i6">Roupa esportiva</label></div>
+          <div class="chip"><input type="checkbox" id="i7" value="Outros"><label for="i7">Outros</label></div>
+        </div>
+      </fieldset>
+
+      <label class="field"><span>SEU NOME</span><input type="text" id="fName" autocomplete="name" placeholder="Como podemos te chamar?"></label>
+      <label class="field"><span>SUA CIDADE</span><input type="text" id="fCity" autocomplete="address-level2" placeholder="Ex.: São Paulo, SP"></label>
+
+      <button type="submit" class="btn btn-dark">Enviar pelo e-mail <span class="arrow">→</span></button>
+      <p class="panel-note">Abre seu app de e-mail com a mensagem pronta para lifecompany@lifecompany.app.br</p>
+    </form>
+  </div>
+</section>
+
+<section class="finale dark" aria-label="Encerramento">
+  <div class="finale-word reveal" aria-hidden="true">PASSE ADIANTE</div>
+  <p class="reveal reveal-d1">O esporte continua. Com você.</p>
+  <a href="#doar" class="btn btn-primary reveal reveal-d2">Quero doar <span class="arrow">→</span></a>
+</section>
+
+</main>
 
 <footer>
-  <p>RERUN Brasil — <a href="https://rerunbrasil.com.br">rerunbrasil.com.br</a></p>
-  <p style="margin-top:.5rem">Passe adiante. O esporte continua.</p>
+  <div class="wrap foot">
+    <div>
+      <a href="#top" class="nav-logo">RE<b>RUN</b></a>
+      <p style="margin-top:.6rem">Passe adiante. O esporte continua.</p>
+      <p style="margin-top:.4rem"><a href="mailto:lifecompany@lifecompany.app.br">lifecompany@lifecompany.app.br</a></p>
+    </div>
+    <div class="foot-credits">
+      RERUN BRASIL<br>
+      <a href="https://rerunbrasil.com.br">RERUNBRASIL.COM.BR</a><br>
+      © <span id="year">2026</span>
+    </div>
+  </div>
 </footer>
 
 <script>
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  $('#year').textContent = new Date().getFullYear();
+
+  /* ── Opening title card (once per session) ── */
+  const intro = $('#intro'), hero = $('#hero');
+  let seen = false;
+  try { seen = sessionStorage.getItem('rerun-intro') === '1'; sessionStorage.setItem('rerun-intro', '1'); } catch (e) {}
+  const startHero = () => { intro.classList.add('done'); hero.classList.add('play'); };
+  if (reduce || seen) { intro.style.display = 'none'; hero.classList.add('play'); }
+  else { setTimeout(startHero, 1900); intro.addEventListener('click', startHero); }
+
+  /* ── Nav state ── */
+  const nav = $('#nav');
+  const onScrollNav = () => nav.classList.toggle('solid', scrollY > innerHeight * .85);
+  addEventListener('scroll', onScrollNav, { passive: true }); onScrollNav();
+
+  /* ── Optional hero video (assets/hero.mp4) ── */
+  const vid = $('#heroVideo');
+  if (!reduce && vid.dataset.src) {
+    vid.addEventListener('canplay', () => { vid.classList.add('ready'); vid.play().catch(() => {}); }, { once: true });
+    vid.addEventListener('error', () => vid.remove(), true);
+    const src = document.createElement('source');
+    src.src = vid.dataset.src; src.type = 'video/mp4';
+    src.addEventListener('error', () => vid.remove());
+    vid.appendChild(src); vid.load();
+  }
+
+  /* ── Hero canvas: running-track lanes in perspective with light trails ── */
+  const cv = $('#heroCanvas'), ctx = cv.getContext('2d');
+  let W, H, dpr, t = 0, raf, runners = [];
+  const LANES = 8;
+  const resize = () => {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    W = cv.width = cv.offsetWidth * dpr; H = cv.height = cv.offsetHeight * dpr;
+  };
+  const spawn = (i) => ({
+    lane: Math.floor(Math.random() * LANES),
+    z: Math.random(), speed: .0018 + Math.random() * .003,
+    hot: i % 3 === 0, len: .05 + Math.random() * .08
   });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  for (let i = 0; i < 14; i++) runners.push(spawn(i));
+  // perspective: z=0 horizon, z=1 viewer
+  const project = (laneX, z) => {
+    const horizon = H * .38, vx = W * .5;
+    const y = horizon + (H - horizon) * Math.pow(z, 1.6) * 1.15;
+    const spread = .04 + Math.pow(z, 1.6) * 1.7;
+    return [vx + laneX * W * spread, y];
+  };
+  const laneX = (i) => (i - (LANES - 1) / 2) / LANES;
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    // lane lines
+    ctx.lineWidth = 1 * dpr;
+    for (let i = 0; i <= LANES; i++) {
+      const x = (i - LANES / 2) / LANES;
+      const [x0, y0] = project(x, 0), [x1, y1] = project(x, 1);
+      const g = ctx.createLinearGradient(0, y0, 0, y1);
+      g.addColorStop(0, 'rgba(250,245,239,0)'); g.addColorStop(1, 'rgba(250,245,239,.13)');
+      ctx.strokeStyle = g; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+    }
+    // moving distance marks
+    for (let k = 0; k < 12; k++) {
+      const z = ((k / 12) + t * .0009) % 1;
+      const [xa, y] = project(-.5, z), [xb] = project(.5, z);
+      ctx.strokeStyle = `rgba(250,245,239,${.06 * z})`;
+      ctx.beginPath(); ctx.moveTo(xa, y); ctx.lineTo(xb, y); ctx.stroke();
+    }
+    // runners as light trails
+    runners.forEach((r, i) => {
+      r.z += r.speed; if (r.z > 1.15) Object.assign(r, spawn(i), { z: 0 });
+      const x = laneX(r.lane);
+      const z0 = Math.max(0, r.z - r.len), z1 = Math.min(1.1, r.z);
+      const [ax, ay] = project(x, z0), [bx, by] = project(x, z1);
+      const g = ctx.createLinearGradient(ax, ay, bx, by);
+      const c = r.hot ? '232,98,43' : '250,245,239';
+      g.addColorStop(0, `rgba(${c},0)`); g.addColorStop(1, `rgba(${c},${r.hot ? .95 : .35})`);
+      ctx.strokeStyle = g; ctx.lineCap = 'round';
+      ctx.lineWidth = (1 + z1 * (r.hot ? 6 : 3)) * dpr;
+      ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(bx, by); ctx.stroke();
+      if (r.hot) {
+        ctx.fillStyle = `rgba(232,98,43,${.25 * z1})`;
+        ctx.beginPath(); ctx.arc(bx, by, (6 + z1 * 22) * dpr, 0, Math.PI * 2); ctx.fill();
+      }
+    });
+    t++;
+  };
+  const loop = () => { draw(); raf = requestAnimationFrame(loop); };
+  resize(); addEventListener('resize', resize);
+  if (reduce) { for (let i = 0; i < 200; i++) runners.forEach(r => r.z = (r.z + r.speed) % 1); draw(); }
+  else {
+    new IntersectionObserver(([e]) => { cancelAnimationFrame(raf); if (e.isIntersecting) loop(); }).observe(hero);
+  }
+
+  /* ── Reveal on scroll ── */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  }), { threshold: .15, rootMargin: '0px 0px -5% 0px' });
+  $$('.reveal').forEach(el => io.observe(el));
+
+  /* ── Mission: words light up as you read ── */
+  const mt = $('#missionText');
+  const wrapWords = (node) => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) frag.append(p);
+          else { const s = document.createElement('span'); s.className = 'w'; s.textContent = p; frag.append(s); }
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) wrapWords(n);
+    });
+  };
+  wrapWords(mt);
+  const words = $$('.w', mt);
+
+  /* ── Journey: sticky scroll story ── */
+  const journey = $('#como'), trail = $('#jTrail'), runner = $('#jRunner'), nodesG = $('#jNodes');
+  const L = trail.getTotalLength();
+  trail.style.strokeDasharray = L; trail.style.strokeDashoffset = L;
+  const stops = [.0, .5, 1];
+  const labels = ['DOAÇÃO', 'TRIAGEM', 'ENTREGA'];
+  const nodes = stops.map((s, i) => {
+    const p = trail.getPointAtLength(s * L);
+    const ns = 'http://www.w3.org/2000/svg';
+    const c = document.createElementNS(ns, 'circle');
+    c.setAttribute('cx', p.x); c.setAttribute('cy', p.y); c.setAttribute('r', 11); c.setAttribute('class', 'node');
+    const tx = document.createElementNS(ns, 'text');
+    tx.setAttribute('x', p.x); tx.setAttribute('y', p.y + (i === 1 ? -30 : 44));
+    tx.setAttribute('text-anchor', i === 0 ? 'start' : i === 2 ? 'end' : 'middle');
+    tx.setAttribute('class', 'node-label'); tx.textContent = labels[i];
+    nodesG.append(c, tx); return [c, tx];
+  });
+  const steps = $$('.step'), jNum = $('#jNum');
+  let lastStep = -1;
+  const setJourney = (p) => {
+    const len = p * L;
+    trail.style.strokeDashoffset = L - len;
+    const pt = trail.getPointAtLength(len);
+    runner.setAttribute('transform', `translate(${pt.x},${pt.y})`);
+    const idx = p < .34 ? 0 : p < .8 ? 1 : 2;
+    nodes.forEach(([c, tx], i) => { const on = p >= stops[i] - .001; c.classList.toggle('on', on); tx.classList.toggle('on', on); });
+    if (idx !== lastStep) {
+      steps.forEach((s, i) => s.classList.toggle('on', i === idx));
+      jNum.textContent = '0' + (idx + 1); lastStep = idx;
+    }
+  };
+
+  /* ── Scroll-driven updates ── */
+  let ticking = false;
+  const onScroll = () => {
+    ticking = false;
+    // mission words
+    const r = mt.getBoundingClientRect();
+    const prog = Math.min(1, Math.max(0, (innerHeight * .85 - r.top) / (r.height + innerHeight * .35)));
+    const n = reduce ? words.length : Math.round(prog * words.length);
+    words.forEach((w, i) => w.classList.toggle('on', i < n));
+    // journey
+    const jr = journey.getBoundingClientRect();
+    const jp = Math.min(1, Math.max(0, -jr.top / (jr.height - innerHeight)));
+    setJourney(jp);
+  };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener('resize', onScroll); onScroll();
+
+  /* ── Count-up stats ── */
+  const fmt = new Intl.NumberFormat('pt-BR');
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, end = +el.dataset.count, dur = 2200, t0 = performance.now();
+    if (reduce) { el.textContent = fmt.format(end); return; }
+    const tick = (now) => {
+      const k = Math.min(1, (now - t0) / dur), v = 1 - Math.pow(1 - k, 4);
+      el.textContent = fmt.format(Math.round(end * v));
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }), { threshold: .5 });
+  $$('[data-count]').forEach(el => cio.observe(el));
+
+  /* ── Donation message builder → mailto ── */
+  $('#donateForm').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const mode = $('input[name=mode]:checked').value;
+    const items = $$('.chips input:checked').map(i => i.value);
+    const name = $('#fName').value.trim(), city = $('#fCity').value.trim();
+    const subject = mode === 'ponto'
+      ? `RERUN — Quero montar um ponto de coleta${city ? ' em ' + city : ''}`
+      : `RERUN — Quero doar equipamentos${city ? ' (' + city + ')' : ''}`;
+    const lines = [
+      'Olá, equipe RERUN!', '',
+      mode === 'ponto' ? 'Tenho interesse em montar um ponto de coleta.' : 'Tenho equipamentos esportivos parados e quero passar adiante.',
+      items.length ? `O que tenho: ${items.join(', ')}.` : '',
+      city ? `Cidade: ${city}.` : '', '',
+      'Qual é o próximo passo?', '',
+      name ? `Abraço,\n${name}` : 'Abraço!'
+    ].filter((l, i, a) => l !== '' || a[i - 1] !== '');
+    location.href = `mailto:lifecompany@lifecompany.app.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  });
+})();
 </script>
 </body>
 </html>
