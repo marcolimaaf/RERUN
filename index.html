@@ -310,6 +310,12 @@ nav.solid{
 .mode .chip label{width:100%;justify-content:center}
 .panel .btn{width:100%;justify-content:center}
 .panel-note{font-size:.72rem;color:var(--grey);margin-top:1rem;text-align:center}
+.mail-out{margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line);display:grid;gap:.8rem}
+.mail-out p{font-size:.82rem;color:var(--grey)}
+.mail-out strong{color:var(--black);font-weight:600;user-select:all}
+.mail-out textarea{width:100%;font:inherit;font-size:.85rem;font-weight:400;line-height:1.6;padding:.9rem;border:1.5px solid var(--line);background:var(--cream);color:var(--black);resize:vertical}
+.btn-line{background:transparent;color:var(--black);box-shadow:inset 0 0 0 1.5px var(--black)}
+.btn-line:hover{background:var(--black);color:var(--cream)}
 .checklist{list-style:none;margin-top:2.2rem}
 .checklist li{display:grid;grid-template-columns:2.2rem 1fr;gap:.6rem;padding:1rem 0;border-top:1px solid var(--line);font-size:.92rem}
 .checklist li b{font-weight:900;color:var(--orange);font-size:.8rem;letter-spacing:.08em;padding-top:.15rem}
@@ -574,6 +580,11 @@ footer{background:var(--ink);color:var(--grey-light);border-top:1px solid var(--
 
       <button type="submit" class="btn btn-dark">Enviar pelo e-mail <span class="arrow">→</span></button>
       <p class="panel-note">Abre seu app de e-mail com a mensagem pronta para lifecompany@lifecompany.app.br</p>
+      <div class="mail-out" id="mailOut" hidden>
+        <p>Se o e-mail não abriu, copie a mensagem abaixo e envie para <strong>lifecompany@lifecompany.app.br</strong></p>
+        <textarea id="mailText" rows="8" readonly aria-label="Mensagem pronta"></textarea>
+        <button type="button" class="btn btn-line" id="copyBtn">Copiar mensagem</button>
+      </div>
     </form>
   </div>
 </section>
@@ -803,7 +814,16 @@ footer{background:var(--ink);color:var(--grey-light);border-top:1px solid var(--
       'Qual é o próximo passo?', '',
       name ? `Abraço,\n${name}` : 'Abraço!'
     ].filter((l, i, a) => l !== '' || a[i - 1] !== '');
+    const out = $('#mailOut'), ta = $('#mailText');
+    ta.value = `Para: lifecompany@lifecompany.app.br\nAssunto: ${subject}\n\n${lines.join('\n')}`;
+    out.hidden = false;
     location.href = `mailto:lifecompany@lifecompany.app.br?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  });
+  $('#copyBtn').addEventListener('click', () => {
+    const ta = $('#mailText'), btn = $('#copyBtn');
+    const done = () => { btn.textContent = 'Mensagem copiada'; setTimeout(() => btn.textContent = 'Copiar mensagem', 2200); };
+    const fallback = () => { ta.focus(); ta.select(); btn.textContent = 'Selecionada: use Ctrl+C'; };
+    try { navigator.clipboard.writeText(ta.value).then(done, fallback); } catch (e) { fallback(); }
   });
 })();
 </script>
